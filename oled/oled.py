@@ -43,32 +43,60 @@ palette[1] = 0x000000
 
 tile_grid = displayio.TileGrid(bitmap, pixel_shader=palette)
 splash.append(tile_grid)
+
+
 display.show(splash)
 
+SPEED = 0.005
+
 while True:
-    for x in range(0, WIDTH):
-        for y in range(0, HEIGHT):
-            bitmap[x, y] = 1
-        time.sleep(0.005)
+	text = "Hello World!"
+	text_area = label.Label(
+		terminalio.FONT, text=text, color=0x000000, x=30, y=32 // 2 - 1
+	)
+	splash.append(text_area)
 
-    for x in reversed(range(0, WIDTH)):
-        for y in reversed(range(0, HEIGHT)):
-            bitmap[x, y] = 0
-        time.sleep(0.005)
-    
+	for x in range(0, WIDTH):
+		for y in range(0, HEIGHT):
+			bitmap[x, y] = 0
+		time.sleep(SPEED)
 
-# Make the display context
+	text_area = label.Label(
+		terminalio.FONT, text=text, color=0xffffff, x=30, y=32 // 2 - 1
+	)
+	splash.append(text_area)
+
+	for x in reversed(range(0, WIDTH)):
+		for y in reversed(range(0, HEIGHT)):
+			bitmap[x, y] = 1
+		time.sleep(SPEED)
+
+while True:
+	pass
+
+# while True:
+#     for x in range(0, WIDTH):
+#        for y in range(0, HEIGHT):
+#            bitmap[x, y] = 1
+#        time.sleep(0.005)
+# 
+#    for x in reversed(range(0, WIDTH)):
+#        for y in reversed(range(0, HEIGHT)):
+#            bitmap[x, y] = 0
+#        time.sleep(0.005)
+
+# # Make the display context
 # splash = displayio.Group()
 # display.show(splash)
-
+# 
 # color_bitmap = displayio.Bitmap(WIDTH, HEIGHT, 1)
 # color_palette = displayio.Palette(1)
 # color_palette[0] = 0xFFFFFF  # White
-
+# 
 # bg_sprite = displayio.TileGrid(color_bitmap, pixel_shader=color_palette, x=0, y=0)
 # splash.append(bg_sprite)
-
-# Draw a smaller inner rectangle
+# 
+# # Draw a smaller inner rectangle
 # inner_bitmap = displayio.Bitmap(WIDTH - BORDER * 2, HEIGHT - BORDER * 2, 1)
 # inner_palette = displayio.Palette(1)
 # inner_palette[0] = 0x000000  # Black
@@ -76,12 +104,15 @@ while True:
 #     inner_bitmap, pixel_shader=inner_palette, x=BORDER, y=BORDER
 # )
 # splash.append(inner_sprite)
-
-# Draw a label
+# 
+# # Draw a label
 # gtx = displayio.Group(scale = 1)
 # text = "Hello World!"
 # text_area = label.Label(
-#     terminalio.FONT, text=text, color=0xFFFFFF, x=0, y=32 // 2 - 1
+#     terminalio.FONT, text=text, color=0xFFFFFF, x=30, y=32 // 2 - 1
 # )
-# gtx.append(text_area)
-# display.show(gtx)
+# splash.append(text_area)
+# display.show(splash)
+# 
+# while True:
+# 	pass
